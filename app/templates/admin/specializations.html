@@ -1,0 +1,135 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - Specialization</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+                
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/admin/dashboard" >
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/doctors">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/patients">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Specializations</span>
+                    </div>
+                </li>
+              
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li style="color:#0066CC;">Specializations</li>
+                      <li>List Page</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                     {% if current_admin %}
+<h2>
+    Specializations List
+    <a href="/admin/create_specialization/" class="btn">Create New Specializations</a>
+</h2>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th width="20%">Action</th>
+  </tr>
+    {% for specialization in specializations %}
+  <tr>
+    <td>{{loop.index}}</td>
+    <td>{{specialization.specialization_name}}</td>
+    <td><a href="/admin/edit_specialization/{{specialization.id}}">Edit</a> - <a class="cur" href="/admin/delete_specialization/{{specialization.id}}" onclick="if(confirm('Are You Sure?')){ alert('delete this record.') }">Delete</a></td>
+  </tr>
+    {% endfor %}
+</table>
+         {% endif %}
+            {% for error in errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}

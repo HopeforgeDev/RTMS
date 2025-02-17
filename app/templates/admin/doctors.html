@@ -1,0 +1,220 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .wrapper .section {
+  width: 2500px;
+  margin-left: 225px;
+  transition: all 0.5s ease;
+}
+
+body.active .wrapper .section {
+  margin-left: 0;
+  width: 2500px;
+}
+
+.wrapper .section .top_navbar {
+  background: rgb(7, 105, 185);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+
+</style>
+
+    <title>RMS - Doctors</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+
+                <li>
+                    <a href="/admin/dashboard">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Doctors</span>
+                    </div>
+                </li>                <li>
+                    <a href="/admin/patients">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+               
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li style="color:#0066CC;">Doctors</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+                     {% if current_admin %}
+                    <h2>
+                        Doctors List
+                        <a href="/admin/create_doctor/" class="btn">Create New Doctor</a>
+                    </h2>
+
+                    <table>
+                        <tr>
+                          <th>#</th>
+                          <th>First Name</th>
+                          <th>Middle Name</th>
+                          <th>Last Name</th>
+                          <th>Professional Statement</th>
+                          <th>Practicing From</th>
+                          <th>Email</th>
+                          <th>Specialization Name</th>
+                          <th>Qualification Name</th>
+                          <th>Institute Name</th>
+                          <th>Procurement Year</th>
+                          <th>Hospital Name</th>
+                          <th>City</th>
+                          <th>Country</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Activity</th>
+                          <th>Action</th>
+                        </tr>
+                        {% set ns = namespace(s=0) %}
+
+                        {% for doctor_inform in all_doctors_inform_list %}
+                        <tr>
+
+                            {% set ns.s = ns.s+1 %}
+                            {% set k = 0 %}
+                            {% set l = 0 %}
+                            {% for i in doctor_inform.get("length_range") %}
+                            {% if i < doctor_inform.get("qualification_list_len") %}
+                                {% set k = i %}
+                            {% endif %}
+                            {% if i < doctor_inform.get("hospital_affiliation_list_len") %}
+                                {% set l = i %}
+                            {% endif %}
+                          <td>{{ns.s}}</td>
+                          <td>{{doctor_inform.get("doctor").first_name}}</td>
+                          <td>{{doctor_inform.get("doctor").middle_name}}</td>
+                          <td>{{doctor_inform.get("doctor").last_name}}</td>
+                          <td>{{doctor_inform.get("doctor").professional_statement}}</td>
+                          <td>{{doctor_inform.get("doctor").practicing_from}}</td>
+                          <td>{{doctor_inform.get("doctor").email}}</td>
+                          <td>{{doctor_inform.get("specialization_name")}}</td>
+                            <td>{{doctor_inform.get("qualification_list")[k].qualification_name}}</td>
+                            <td>{{doctor_inform.get("qualification_list")[k].institute_name}}</td>
+                            <td>{{doctor_inform.get("qualification_list")[k].procurement_year}}</td>
+                            <td>{{doctor_inform.get("hospital_affiliation_list")[l].hospital_name}}</td>
+                            <td>{{doctor_inform.get("hospital_affiliation_list")[l].city}}</td>
+                            <td>{{doctor_inform.get("hospital_affiliation_list")[l].country}}</td>
+                            <td>{{doctor_inform.get("hospital_affiliation_list")[l].start_date}}</td>
+                            <td>{{doctor_inform.get("hospital_affiliation_list")[l].end_date }}</td>
+                            {% if doctor_inform.get("doctor").disabled %}
+                          <td>Deactivated</td>
+                            {% endif %}
+                            {% if not doctor_inform.get("doctor").disabled %}
+                          <td>Activated</td>
+                            {% endif %}
+                            <td><a href="/admin/edit_doctor/{{doctor_inform.get('doctor').id}}"><i class='fas fa-edit' style='font-size:20px;color:darkblue'></i></a><br>
+                                <a class="cur" href="/admin/delete_doctor/{{doctor_inform.get('doctor').id}}" onclick="if(confirm('Are You Sure?')){ alert('delete this record.') }"><i class="fa fa-trash-o" style="font-size:20px;color:red"></i></a><br>
+                                {% if doctor_inform.get("doctor").disabled %}
+                                <a class="cur" href="/admin/activate_doctor/{{doctor_inform.get('doctor').id}}" onclick="if(confirm('Are You Sure?')){ alert('activate this doctor.') }"><i class='fas fa-user-check' style='font-size:20px;color:blue'></i></a>
+                                {% endif %}
+                                {% if not doctor_inform.get("doctor").disabled %}
+                                <a class="cur" href="/admin/deactivate_doctor/{{doctor_inform.get('doctor').id}}" onclick="if(confirm('Are You Sure?')){ alert('deactivate this doctor.') }"><i class='fas fa-user-times' style='font-size:20px;color:red'></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+
+
+                      </table>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}
+

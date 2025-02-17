@@ -1,0 +1,159 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+<style>
+
+    input[type="number"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"]{
+          width: 96%;
+          border: 1px solid rgb(7, 105, 185);
+          padding: 5px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+        }
+    </style>
+
+    <title>RMS - My Profile</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </div>
+                </li>
+                <li>
+                    <a href="/admin/doctors">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/patients">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+
+
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      
+                      <li><a href="/admin/dashboard">My Profile</a></li>
+                      <li>Edit My Profile</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+                     {% if current_admin %}
+                    <h2>
+                       Edit Profile
+                    </h2>
+                    <form action="/admin/edit_profile" method="post">
+                      <label for="name">First Name:</label>
+                      <input type="text" id="first_name" name="first_name" value={{current_admin.first_name}}><br>
+                      <label for="middle_name">Middle Name :</label>
+                      <input type="text" id="middle_name" name="middle_name" value={{current_admin.middle_name}}><br>
+                      <label for="last_name">Last Name:</label>
+                      <input type="text" id="last_name" name="last_name" value={{current_admin.last_name}}><br>
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" name="email" value={{current_admin.email}}><br>
+                      <label for="contact_number">Contact Number:</label>
+                      <input type="text" id="contact_number" name="contact_number" value={{current_admin.contact_number}}><br>
+                      <label for="gender">Gender:</label>
+                      <select id="gender" name="gender" value={{current_admin.gender}}>
+                          <option value="1">Select option</option>
+                          <option value="2">Male</option>
+                          <option value="3">Female</option>
+                        </select>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" value=""><br>
+                        <label for="secret_for_administration">Secret For Administration:</label>
+                        <input type="password" id="secret_for_administration" name="secret_for_administration" value=""><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}

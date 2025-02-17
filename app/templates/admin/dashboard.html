@@ -1,0 +1,144 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - My Profile</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/admin-signUp.png">
+                <h3>Admin page</h3>
+                
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </div>
+                </li>
+                <li>
+                    <a href="/admin/doctors">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/patients">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+               
+                
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li style="color:#0066CC;">My Profile</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                     {% if current_admin %}
+                 <h2> Profile  <a href="/admin/edit_profile" class="btn">Edit Profile</a></h2>
+                 <table style="width:100%">
+                    <tr>
+                      <th>First Name:</th>
+                      <td>{{current_admin.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Middle Name:</th>
+                        <td>{{current_admin.middle_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name:</th>
+                        <td>{{current_admin.last_name}}</td>
+                    </tr>
+                    <tr>
+                      <th>Contact Number:</th>
+                      <td>{{current_admin.contact_number}}</td>
+                    </tr>
+                    <tr>
+                      <th>Gender:</th>
+                      <td>{{current_admin.gender}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{current_admin.email}}</td>
+                    </tr>
+                     {% endif %}
+                  </table>
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}

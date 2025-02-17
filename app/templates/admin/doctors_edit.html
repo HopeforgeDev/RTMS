@@ -1,0 +1,229 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+
+    <title>RMS - Doctors</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+
+                <li>
+                    <a href="/admin/dashboard">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Doctors</span>
+                    </div>
+                </li>                <li>
+                    <a href="/admin/patients">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+
+
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li><a href="doctors.html">Doctors</a></li>
+                      <li>Edit Doctor</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                {% if current_admin %}
+<h2>
+    Edit Doctor
+</h2>
+
+       <form action="#" method="post">
+    <img src="Capture.PNG" width="200px">
+    <br>
+    <br>
+    <input type="submit" value="Edit Picture">
+    <br>
+    <br>
+  <label for="first_name">First Name :</label>
+  <input type="text" id="first_name" name="first_name" value=""><br>
+
+  <label for="middle_name">Middle Name :</label>
+  <input type="text" id="middle_name" name="middle_name" value=""><br>
+
+  <label for="last_name">Last Name :</label>
+  <input type="text" id="last_name" name="last_name" value=""><br>
+    
+  <label for="specializations">Specializations :</label>
+  <select name="specializations" id="specializations" >
+    <option value="1">Family Doctor</option>
+    <option value="2">Cardiologist</option>
+    <option value="3">Podiatrist</option>
+  </select>
+  <br>
+   
+  <label for="professional_statement">Professional Statement :</label>
+  <textarea id="professional_statement" name="professional_statement" rows="6" ></textarea><br>
+
+  <label for="practicing_from">Practicing From:</label>
+  <input type="text" id="practicing_from" name="practicing_from" value="" class="datepicker"><br>
+  
+  <br />
+  <hr /><br>
+  <div class="full">
+  <h3>Qualification</h3>
+  <br />
+  <div class="full" id="qualification_row">
+    <div class="field-box span-3">
+        <label>Qualification Name</label>
+        <input type="text" name="qualification_name[]" value="">
+    </div>
+    <div class="field-box span-3">
+        <label>Institute Name </label>
+        <input type="text" name="institute_name[]" value="">
+    </div>
+    <div class="field-box span-3">
+        <label>Procurement Year</label>
+        <input type="text" name="procurement_year[]" value="" class="datepicker">
+    </div>
+  </div>
+  <div class="full" id="qualifiation_append_to"></div>
+  <br >
+    <a id="add_more_qualifications" class="add-more cur" >Add More Qualifications</a>
+  </div>
+  <hr /><br>
+  <div class="full">
+  <h3>Hospital Affiliation</h3>
+  <br />
+  <div class="full" id="affiliations_row">
+    <div class="field-box span-5">
+        <label>Hospital Name</label>
+        <input type="text" name="hospital_name[]" value="">
+    </div>
+    <div class="field-box span-5">
+        <label>City</label>
+        <input type="text" name="city[]" value="">
+    </div>
+    <div class="field-box span-5">
+        <label>Country</label>
+        <input type="text" name="country[]" value="">
+    </div>
+    <div class="field-box span-5">
+        <label>Start Date</label>
+        <input type="text" name="start_date[]" value="" class="datepicker">
+    </div>
+    <div class="field-box span-5">
+        <label>End Date</label>
+        <input type="text" name="end_date[]" value="" class="datepicker">
+    </div>
+  </div>
+  <div class="full" id="affiliations_append_to"></div>
+  <br>
+  <a id="add_more_hospital" class="add-more cur" >Add More Hospital Affiliations</a>
+  <br >
+  </div>
+  <hr /><br>
+  <input type="submit" value="Submit">
+</form>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+  <script>
+    $(document).ready(function(){
+            $('#add_more_qualifications').click(function(){
+                $("#qualification_row").clone().appendTo("#qualifiation_append_to");
+                $( ".datepicker" ).datepicker();
+            });
+            
+            $('#add_more_hospital').click(function(){
+                $("#affiliations_row").clone().appendTo("#affiliations_append_to", function(){
+                    $( ".datepicker" ).datepicker();
+                });
+               
+            });
+            
+            $( ".datepicker" ).datepicker();
+    });
+
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    });
+  </script>
+
+{% endblock %}
+

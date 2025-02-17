@@ -1,0 +1,217 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="jquery-ui/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+      input[type="number"],
+      input[type="password"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"]{
+            width: 96%;
+            border: 1px solid rgb(7, 105, 185);
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+          }
+      </style>
+  
+    <title>RMS - Doctors</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Register page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Patient</span>
+                    </div>
+                </li>
+                <li>
+                    <a href="/register/doctor">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Doctor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/register/pharmacy">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Pharmacy</span>
+                    </a>
+                </li>
+              <li>
+                    <a href="/register/admin">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Admin</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li><a href="/">Home</a></li>
+                      <li>Register as Patient</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+                <h2>
+                    Create New Account
+                </h2>
+
+                  <form method="post" id="form" action="/register/patient">
+          <div class="field-wrapper">
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="Enter your first name" required autocomplete="off" />
+          </div>
+          <div class="field-wrapper">
+            <label>Middle Name</label>
+            <input type="text" name="middle_name" placeholder="Enter your middle name" required autocomplete="off" />
+          </div>
+          <div class="field-wrapper">
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Enter your last name" required autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Phone Number</label>
+            <input type="tel" id="contact_number" name="contact_number"
+              placeholder="Enter your contact number as this format: xx-xxx-xxx" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"
+              required autocomplete="off">
+          </div>
+
+          <div class="field-wrapper">
+            <label>Date of Birth</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" autocomplete="off">
+          </div>
+
+          <div class="field-wrapper">
+            <label>Weight</label>
+            <input type="number" name="weight" min="0" placeholder="Enter your weight in kg" required
+              autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Length</label>
+            <input type="number" name="length" min="0" placeholder="Enter your length in cm" required
+              autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label for="gender">Gender</label>
+          <select name="gender" id="gender">
+            <option value="no_option">------------------------------------------------------------------------------------------------------------ select gender
+              ------------------------------------------------------------------------------------------------------------ </option>
+            <option value="Male">------------------------------------------------------------------------------------------------------------------ Male ------------------------------------------------------------------------------------------------------------------
+            </option>
+            <option value="Female">----------------------------------------------------------------------------------------------------------------- Female
+              ------------------------------------------------------------------------------------------------------------------ </option>
+          </select>
+          </div>
+
+          <div class="field-wrapper">
+            <label>Medicines</label>
+            <input type="text" name="medicines" placeholder="Enter your current taken medicines" autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Pathological Cases</label>
+            <input type="text" name="pathological_cases" placeholder="Enter your pathological cases"
+              autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Permanent Health Symptoms</label>
+            <input type="text" name="permanent_health_symptoms" placeholder="Enter your permanent health symptoms"
+              autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Surgeries</label>
+            <input type="text" name="surgeries" placeholder="Enter your applied surgeries" autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Email</label>
+            <input type="email" name="email"
+              placeholder="Enter your email as this format: yourusername@patients.rtms.com" required
+              autocomplete="off" />
+          </div>
+
+          <div class="field-wrapper">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required autocomplete="off" />
+          </div>
+            <br>
+          <div class="field-wrapper">
+    <input type="submit" value="submit" style="width: 1042px;"><br>
+          </div>
+          <div class="field-wrapper">
+            {% for error in errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+
+          </div>
+        </form>
+        <div id="responseArea"></div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+  <!--
+    <div id="root"></div>
+      -->
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("date_of_birth").setAttribute("max", today);
+  </script>
+
+{% endblock %}

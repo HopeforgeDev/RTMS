@@ -1,0 +1,195 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+        <link rel="stylesheet" href="../../static/css.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="jquery-ui/jquery.timepicker.min.css">
+    />
+    <title>RMS - Appointment</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Patient page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/patient/dashboard/">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">Appointments</span>
+                    </div>
+                </li>
+
+                {% if current_patient or current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_patient and not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                        
+                        <li><a href="/patient/appointments">Appointments</a></li>
+                      <li><a href="#">Information About Doctor</a></li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                    {% if all_doctor_inform_dict.get("doctor") %}
+                    <h2>Profile <a href='/doctor/edit_profile' class="btn">Edit Profile</a> </h2>
+                    <table style="width:100%">
+                        <tr>
+                          <th>First Name:</th>
+                          <td>{{all_doctor_inform_dict.get("doctor").first_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Middle Name:</th>
+                            <td>{{all_doctor_inform_dict.get("doctor").middle_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{all_doctor_inform_dict.get("doctor").last_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Professional Statement:</th>
+                            <td>{{all_doctor_inform_dict.get("doctor").professional_statement}}</td>
+                        </tr>
+                        <tr>
+                            <th>Practicing From:</th>
+                            <td>{{all_doctor_inform_dict.get("doctor").practicing_from}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{all_doctor_inform_dict.get("doctor").email}}</td>
+                         </tr>
+                         <tr>
+                            <th>Specialization:</th>
+                            <td>{{all_doctor_inform_dict.get("specialization_name")}}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    {% for i in all_doctor_inform_dict.get("qualification_list_range") %}
+                    <table style="width:100%">
+                    <h2>Qualification {{i+1}}</h2>
+                            <tr>
+                                <th>Qualification name:</th>
+                                    <td>{{all_doctor_inform_dict.get("qualification_list")[i].qualification_name}}</td>
+                             </tr>
+                             <tr>
+                                <th>Institute name:</th>
+                                    <td>{{all_doctor_inform_dict.get("qualification_list")[i].institute_name}}</td>
+                             </tr>
+                             <tr>
+                                <th>Procurement year:</th>
+                                    <td>{{all_doctor_inform_dict.get("qualification_list")[i].procurement_year}}</td>
+                             </tr>
+                            </table>
+                    <br>
+                                {% endfor %}
+                    <br>
+                    {% for i in all_doctor_inform_dict.get("hospital_affiliation_list_range") %}
+                    <table style="width:100%">
+                              <h2>Hospital Affiliation {{i+1}}</h2>
+                        <tr>
+                                <th>Hospital name:</th>
+                                    <td>{{all_doctor_inform_dict.get("hospital_affiliation_list")[i].hospital_name}}</td>
+                             </tr>
+                             <tr>
+                                <th>City:</th>
+                                    <td>{{all_doctor_inform_dict.get("hospital_affiliation_list")[i].city}}</td>
+                             </tr>
+                             <tr>
+                                <th>Country:</th>
+                                    <td>{{all_doctor_inform_dict.get("hospital_affiliation_list")[i].country}}</td>
+                             </tr>
+                             <tr>
+                                <th>Start date:</th>
+                                    <td>{{all_doctor_inform_dict.get("hospital_affiliation_list")[i].start_date}}</td>
+                             </tr>
+                             <tr>
+                                <th>End date:</th>
+                                 <td>{{all_doctor_inform_dict.get("hospital_affiliation_list")[i].end_date}}</td>
+                             </tr>
+                            </table>
+                    <br>
+                            {% endfor %}
+                        {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="jquery-ui/jquery.timepicker.min.js"></script>
+  <script>
+    $(document).ready(function(){
+            
+            
+            $( ".datepicker" ).datepicker();
+            $('input.timepicker').timepicker({});
+            
+    });
+
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    });
+  </script>
+
+{% endblock %}

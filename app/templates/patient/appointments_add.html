@@ -1,0 +1,183 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <!-- Load icon library -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="../../static/style/css.css">
+
+    <style>
+  /* Style the search field */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+
+  /* Style the submit button */
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+  }
+
+  form.example button:hover {
+    background: #0b7dda;
+  }
+
+  /* Clear floats */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+    </style>
+
+    <title>RMS - Doctor Specialization</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Patient page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/patient/dashboard/">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">Appointments</span>
+                    </div>
+                </li>
+
+                {% if current_patient %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_patient %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                  <input type="checkbox">
+                  
+                </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li><a href="/patient/appointment/choose_specialization">Make Appointment</a></li>
+                      <li>List Page</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                  {% if current_patient %}
+                  <ul class="breadcrumb">
+                    <li><a href="/patient/appointment/choose_specialization">Specializations</a></li>
+                    <li>{{specialization_name}}</li>
+                  </ul>
+    <br/>
+    <br/>
+    <!-- Load icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- The form -->
+    <!-- <form class="example" action="/search" method="post">
+    <input type="text" placeholder="Search.." name="search">
+    <button type="submit"><i class="fa fa-search"></i></button>
+    </form> -->
+
+<br/>
+
+<table>
+  <tr>
+    <th width="4%">#</th>
+    <th width="5%">Doctor</th>
+    <th width="40%">Doctor Full Name</th>
+    <th width="35%">Office Name</th>
+    <th width="16%">Action</th>
+  </tr>
+  {% set ns = namespace(row_number=1) %}
+  {% for doctor_office_dict in doctors_office_dict_list %}
+    {% for office in doctor_office_dict.office_list %}
+  <tr>
+    <td>{{ ns.row_number }}</td>
+    <td><img src="../../static/images/doctor-signUp.png" width="40px"></td>
+    <td>{{ doctor_office_dict.doctor.first_name }} {{ doctor_office_dict.doctor.middle_name }} {{ doctor_office_dict.doctor.last_name }}</td>
+    <td>{{ office.hospital_name }}</td>
+    <td>
+      <a href='/patient/review_doctor/{{ doctor_office_dict.doctor.id }}'>Review</a> - 
+      <a href='/patient/choose_doctor_office/{{ office.id }}'>Choose</a>
+    </td>
+  </tr>
+  {% set ns.row_number = ns.row_number + 1 %}
+    {% endfor %}
+  {% endfor %}
+</table>
+{% endif %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+ </script>
+
+{% endblock %}

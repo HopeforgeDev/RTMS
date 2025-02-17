@@ -1,0 +1,188 @@
+{% extends "shared/base.html" %}
+
+{% block title %}
+    <title>RMS - My Patients</title>
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile">
+            <img src="../../static/images/Capture.PNG" alt="Doctor Profile">
+
+            {% if current_doctor %}
+
+            <h3>Dr. {{ current_doctor.first_name }} {{ current_doctor.last_name }}</h3>
+
+            {% endif %}
+        </div>
+        <ul>
+            <li>
+                <a href="/doctor/dashboard">
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                    <span class="item">My Profile</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="/doctor/patients">
+                    <span class="icon"><i class="fas fa-user-injured"></i></span>
+                    <span class="item">My Patients</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logout">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="item">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+<!-- Navigation Bar-->
+<div class="section">
+    <div class="top_navbar">
+        <div class="hamburger">
+            <a href="#">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
+        <label class="share-btn">Location
+            <input type="checkbox">
+
+        </label>
+    </div>
+
+    <!-- start of middle content -->
+    <div class="middle-content">
+        <div class="full">
+            <ul class="breadcrumb">
+                <li><a href="#">My Patients</a></li>
+            </ul>
+        </div>
+
+        <div class="full p-20">
+
+            <h2>
+                Patient List
+            </h2>
+                    
+                    <div class="card-body">
+                        {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+
+                        {% if patients %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Full Name</th>
+                                        <th>Location</th>
+                                        <th>Last Visit</th>
+                                        <th>Contact</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in patients %}
+                                    {% set patient = data.get("patient") %}
+                                    {% set appointment = data.get("appointment") %}
+                                    {% set office = data.get("office") %}
+                                    <!-- {% set hospital_affiliation_name = data.get("hospital_affiliation_nameoffice") %} -->
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>
+                                            {{ patient.first_name }} {{ patient.middle_name }} {{ patient.last_name }}
+                                        </td>
+                                        <td>
+                                            <!-- {{ hospital_affiliation_name }}<br> -->
+                                            {{ office.city }}, {{ office.country }}
+                                        </td>
+                                        <td>
+                                            <div class="text-nowrap">
+                                                {{ appointment.appointment_taken_date }}<br>
+                                                <small class="text-muted">{{ appointment.probable_start_time }}</small> -
+                                                <small class="text-muted">{{ appointment.actual_end_time }}</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="mailto:{{ patient.email }}">{{ patient.email }}</a><br>
+                                            {{ patient.contact_number }}
+                                        </td>
+                                        <td>
+                                            <a href="/doctor/patients/{{ patient.id }}" 
+                                               class="btn btn-sm btn-outline-primary"
+                                               title="View Profile">
+                                                <i class="fas fa-file-medical"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle"></i> No patients found in your records.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu toggle
+    document.querySelector('.hamburger').addEventListener('click', function() {
+        document.querySelector('body').classList.toggle('sidebar-active');
+    });
+
+    // Initialize tooltips
+    $('[title]').tooltip();
+});
+</script>
+
+<style>
+.sidebar {
+    background: #2c3e50;
+    color: white;
+}
+
+.profile img {
+    border: 3px solid #3498db;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.card {
+    border-radius: 0.75rem;
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.alert {
+    border-radius: 0.5rem;
+}
+
+.btn-outline-primary {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    color: white;
+}
+</style>
+{% endblock %}

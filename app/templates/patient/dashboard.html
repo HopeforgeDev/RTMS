@@ -1,0 +1,167 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - My Profile</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Patient page</h3>
+                
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </div>
+                </li>
+                <li>
+                    <a href="/patient/appointments">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Appointments</span>
+                    </a>
+                </li>
+               
+                
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input id="patient_location" name="my_location" type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li style="color:#0066CC;">My Profile</li>
+                    </ul>
+                </div>
+                <form action="" method="post">
+                <input type="hidden" name="patient_latitude" id="patient_latitude" value="0">
+                <input type="hidden" name="patient_longitude" id="patient_longitude" value="0">
+                    </form>
+                <div class="full p-20">
+                     {% if current_patient %}
+                 <h2> Profile  <a href="/patient/profile_edit" class="btn">Edit Profile</a></h2>
+                 <table style="width:100%">
+                    <tr>
+                      <th>First Name:</th>
+                      <td>{{current_patient.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Middle Name:</th>
+                        <td>{{current_patient.middle_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Name:</th>
+                        <td>{{current_patient.last_name}}</td>
+                    </tr>
+                    <tr>
+                      <th>Contact Number:</th>
+                      <td>{{current_patient.contact_number}}</td>
+                    </tr>
+                    <tr>
+                      <th>Gender:</th>
+                      {% if current_patient.gender %}
+                      <td>Male</td>
+                      {% endif %}
+                      {% if not current_patient.gender %}
+                      <td>Female</td>
+                      {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{current_patient.email}}</td>
+                    </tr>
+                  </table>
+                    <br>
+                    <br>
+                    <div id="myMap" style="width:1084px;height:800px;"></div>
+                     {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+<script type='text/javascript'>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+
+ const checkbox = document.querySelector("input[name=my_location]");
+
+checkbox.addEventListener("change", (e) => {
+  if (e.target.checked) {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'Ahi5fdFNJrgjzGqsF9nloXNm7wfNIAadfGavb032SJAKMysVD12cppvXL2ORneCy'
+        });
+        //Request the user's location
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var loc = new Microsoft.Maps.Location(
+                position.coords.latitude,
+                position.coords.longitude);
+            var patient_latitude = position.coords.latitude
+            var patient_longitude = position.coords.longitude
+            document.getElementById("patient_latitude").value = patient_latitude;
+            document.getElementById("patient_longitude").value = patient_longitude;
+
+
+            //Add a pushpin at the user's location.
+            var pin = new Microsoft.Maps.Pushpin(loc);
+            map.entities.push(pin);
+
+            //Center the map on the user's location.
+            map.setView({ center: loc, zoom: 15 });
+        });
+        } else {
+
+  }
+});
+  </script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+
+{% endblock %}

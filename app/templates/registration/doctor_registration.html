@@ -1,0 +1,336 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+    <meta id="my-data" data-name="{{i}}" data-other="{{other}}">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="jquery-ui/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        input[type="number"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"]{
+              width: 96%;
+              border: 1px solid rgb(7, 105, 185);
+              padding: 5px;
+              margin-bottom: 10px;
+              border-radius: 5px;
+            }
+        </style>
+    
+    <title>RMS - Doctors</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/doctor-signUp.png">
+                <h3>Register page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/register/patient">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patient</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Doctor</span>
+                    </div>
+                </li>
+                <li>
+                    <a href="/register/pharmacy">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Pharmacy</span>
+                    </a>
+                </li>
+                                <li>
+                    <a href="/register/admin">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Admin</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li><a href="/">Home</a></li>
+                      <li>Register as Doctor</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+
+<h2>
+    Create New Account
+</h2>
+<form action="/register/doctor" method="post">
+
+    <label for="first_name">First Name :</label>
+    <input type="text" name="first_name" placeholder="Enter your first name" required autocomplete="off" />
+
+    <label for="middle_name">Middle Name :</label>
+    <input type="text" name="middle_name" placeholder="Enter your middle name" required autocomplete="off" />
+
+    <label for="last_name">Last Name :</label>
+    <input type="text" name="last_name" placeholder="Enter your last name" required autocomplete="off" />
+
+    <label for="email">Email:</label>
+    <input type="email" name="email"
+    placeholder="Enter your email as this format: yourusername@doctors.rtms.com" required
+    autocomplete="off" />
+    
+    <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Enter your password" required autocomplete="off" />
+    
+    <label for="secret_for_doctor">Secret for Doctors:</label>
+    <input type="password" name="secret_for_doctor" placeholder="Enter your password" required autocomplete="off" />
+    
+    <label for="specialization_name">Specializations :</label>
+    
+    <select name="specialization_name" id="specialization_name" >
+        <option value="">>- Select Option <-</option>
+        {% for specialization_name in specialization_name_list %}
+        <option value="{{specialization_name}}">{{specialization_name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    
+    <label for="professional_statement">Professional Statement :</label>
+    <textarea name="professional_statement" placeholder="Enter your professional statement" rows="6" required
+    autocomplete="off"></textarea><br>
+    
+    <label for="practicing_from">Practicing From:</label>
+    <input type="date" name="practicing_from" id="practicing_from" placeholder="Enter your practicing from date"
+    required autocomplete="off"><br>
+    
+    <br />
+    <hr /><br>
+    <div class="full">
+        <h3>Qualification</h3>
+        <br />
+        <input type="hidden" name="i" id="i" value="1">
+        <div class="qualification_all_rows">
+            <div>
+                <div class="field-box span-3">
+                    <label>Qualification Name</label>
+                    <input type="text" id="qualification_name" name="qualification_name[0]" placeholder="Enter your qualification name" required
+                    autocomplete="off">
+                </div>
+                <div class="field-box span-3">
+                    <label>Institute Name </label>
+                    <input type="text" id="institute_name" name="institute_name[0]" placeholder="Enter your institute name" required autocomplete="off">
+                </div>
+                <div class="field-box span-3">
+                    <label>Procurement Year</label>
+                <input type="number" id="procurement_year" name="procurement_year[0]" min="1940" max="2022" placeholder="Enter your procurement year"
+                required autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <br>
+    <a id="add_more_qualifications" href="javascript:void(0);" class="add-more cur"><i class="fa fa-plus-square" style="font-size:24px;color:blue;margin:18px"></i></a>
+</div>
+
+<hr /><br>
+<div class="full">
+    <h3>Hospital Affiliation</h3>
+    <br />
+    <input type="hidden" name="j" id="j" value="1">
+    <div class="affiliation_all_rows">
+        <div>
+            <div class="field-box span-5">
+                <label>Hospital Name</label>
+                <input type="text" name="hospital_name[0]" id="hospital_name" placeholder="Enter your hospital name" required autocomplete="off">
+            </div>
+            <div class="field-box span-5">
+                <label>City</label>
+                <input type="text" name="city[0]" id="city" placeholder="Enter your city name" required autocomplete="off">
+            </div>
+            <div class="field-box span-5">
+                <label>Country</label>
+                <input type="text" name="country[0]" id="country" placeholder="Enter your country name" required autocomplete="off">
+            </div>
+            <div class="field-box span-5">
+                <label>Start Date</label>
+                <input type="date" name="start_date[0]" id="start_date" placeholder="Enter your start date"
+                class="datepicker" required autocomplete="off">
+            </div>
+            <div class="field-box span-5">
+                <label>End Date</label>
+                <input type="date" name="end_date[0]" id="end_date" placeholder="Enter your end date"
+                required autocomplete="off">
+            </div>
+        </div>
+    </div>
+    <br>
+    <a id="add_more_hospital" class="add-more cur"><i class="fa fa-plus-square" style="font-size:24px;color:blue;margin:10px"></i></a>
+    <br>
+</div>
+<br>
+<div class="field-box span-5">
+    {% for error in errors %}
+    <p style="color: red">{{ error }}</p>
+    {% endfor %}
+
+    </div>
+    <hr /><br>
+    <input type="submit" value="submit" style="width: 1030px;"><br>
+
+</form>
+
+
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+            var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("start_date").setAttribute("max", today);
+        document.getElementById("practicing_from").setAttribute("max", today);
+
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+        var i = 1; //Initial field counter is 1
+    var addMoreQualifications = $('#add_more_qualifications'); //Add button selector
+    var wrapperQualification = $('.qualification_all_rows'); //Input field wrapper
+    var fieldHTMLQualification = '<div>'+
+            '<div class="field-box span-3">'+
+                '<label>Qualification Name</label>'+
+                '<input type="text" id="qualification_name" name="qualification_name['+i+']" placeholder="Enter your qualification name" required autocomplete="off"></div>'+
+            '<div class="field-box span-3">'+
+                '<label>Institute Name </label>'+
+                '<input type="text" id="institute_name" name="institute_name['+i+']" placeholder="Enter your institute name" required autocomplete="off"></div>'+
+            '<div class="field-box span-3">'+
+                '<label>Procurement Year</label>'+
+                '<input type="number" id="procurement_year" name="procurement_year['+i+']" min="1940" max="2022" placeholder="Enter your procurement year" required autocomplete="off">'+
+        '<a id="remove_qualification" href="javascript:void(0);" class="add-more cur"><i class="fa fa-minus-square" style="font-size:24px;color:red;margin:18px"></i></a>'+
+                '</div>'+
+    '</div>'; //New input field html
+
+
+    //Once add button is clicked
+    $(addMoreQualifications).click(function(){
+        //Check maximum number of input fields
+        if(i < maxField){
+            i++; //Increment field counter
+            document.getElementById("i").value = i;
+            $(wrapperQualification).append(fieldHTMLQualification); //Add field html
+
+        }
+    });
+
+    //Once remove button is clicked
+    $(wrapperQualification).on('click', '#remove_qualification', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        i--; //Decrement field counter
+        document.getElementById("i").value = i;
+    });
+
+    var maxFieldJ = 10; //Input fields increment limitation
+    var j = 1; //Initial field counter is 1
+    var add_more_hospital = $('#add_more_hospital'); //Add button selector
+    var wrapperAffiliation = $('.affiliation_all_rows'); //Input field wrapper
+    var fieldHTMLAffiliation = '<div>'+
+            '<div class="field-box span-5">'+
+                '<label>Hospital Name</label>'+
+                '<input type="text" name="hospital_name['+j+']" id="hospital_name" placeholder="Enter your hospital name" required autocomplete="off">'+
+            '</div>'+
+            '<div class="field-box span-5">'+
+                '<label>City</label>'+
+                '<input type="text" name="city['+j+']" id="city" placeholder="Enter your city name" required autocomplete="off">'+
+            '</div>'+
+            '<div class="field-box span-5">'+
+                '<label>Country</label>'+
+                '<input type="text" name="country['+j+']" id="country" placeholder="Enter your country name" required autocomplete="off">'+
+            '</div>'+
+            '<div class="field-box span-5">'+
+                '<label>Start Date</label>'+
+                '<input type="date" name="start_date['+j+']" id="start_date" placeholder="Enter your start date" class="datepicker" required autocomplete="off">'+
+            '</div>'+
+            '<div class="field-box span-5">'+
+                '<label>End Date</label>'+
+                '<input type="date" name="end_date['+j+']" id="end_date" placeholder="Enter your end date" required autocomplete="off">'+
+                '<a id="remove_affiliation" href="javascript:void(0);" class="add-more cur"><i class="fa fa-minus-square" style="font-size:24px;color:red;margin:10px"></i></a>'+
+            '</div>'+
+            '</div>'; //New input field html
+
+
+    //Once add button is clicked
+    $(add_more_hospital).click(function(){
+        //Check maximum number of input fields
+        if(j < maxField){
+            j++; //Increment field counter
+            $(wrapperAffiliation).append(fieldHTMLAffiliation); //Add field html
+            document.getElementById("j").value = j;
+        }
+    });
+
+    //Once remove button is clicked
+    $(wrapperAffiliation).on('click', '#remove_affiliation', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        j--; //Decrement field counter
+        document.getElementById("j").value = j;
+    });
+});
+
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    });
+  </script>
+
+{% endblock %}

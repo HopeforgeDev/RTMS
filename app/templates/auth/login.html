@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" sizes="180x180" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="152x152" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="144x144" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="120x120" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="114x144" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="76x76" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="72x72" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="60x60" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="57x57" href="../../static/images/rtms_logo.png">
+    <title>Log in to RTMS</title>
+    <link rel="stylesheet" href="../../static/style/patientSignUpStyle.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <style>
+      .password-container{
+  width: 400px;
+  position: relative;
+}.password-container input[type="password"],
+.password-container input[type="text"]{
+  width: 100%;
+  padding: 12px 36px 12px 12px;
+  box-sizing: border-box;
+}.fa-eye{
+  position: absolute;
+  top: 15px;
+  right: 2%;
+  cursor: pointer;
+  color: lightgray;
+}
+    </style>
+
+<body>
+    <div class="app-container" tabindex="0">
+        <div class="general-container general-container--nomenu general-container--light">
+            <section class="content-panel">
+                <header class="header header--full hide-on-print">
+                    <div id="divLoader">
+                        <em class="ui-kit-loader-medium"></em>
+                    </div>
+                    <div class="header-wrapper">
+                        <div class="header__panel header__panel--logo">
+                            <ul class="header-menu-bar">
+                                <li class="header-menu-bar__item hide-since-tablet">
+                                     <a class="nav-menu-icon nav-menu-icon--logo logo-nopointer" href="/" title="Homepage" >
+                                        <img alt="Logo" id="logo" src=../../static/images/rtms_logo.png >
+                                    </a>                                
+                                </li>
+                                <li class="header-menu-bar__item hide-up-to-tablet">
+                                        <a class="nav-menu-icon nav-menu-icon--logo logo-nopointer" href="/" title="Homepage" >
+                                            <img alt="Logo" id="logo" src=../../static/images/rtms_logo.png >
+                                        </a>
+                                </li>
+                                <li class="header-menu-bar__item hide-up-to-tablet">
+                                    <a href="/" class="logo"><span>R</span>oute<span>T</span>o<span>M</span>edical<span>S</span>ervices</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="header__panel header__panel--back">
+                            <ul class="header-menu-bar">
+                                <li class="header-menu-bar__item">
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="header__panel header__panel--spacer hide-on-print"></div>
+                        <div class="header__panel hide-on-print">
+                            <ul class="header-menu-bar header-menu-bar--main">
+                                <li class="profile-link header-menu-bar__item header-menu-bar__item--main header-menu-bar__item--last">
+                                    <a class="support_text login-link" rel="noopener" target="_blank" href="https://support.patientaccess.com/">
+                                        <span class="hide-secure-partnership-up-to-tablet show-on-mobile"><svg class="icon-help icon-outline support_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,1A11,11,0,1,1,1,12,11,11,0,0,1,12,1m0-1A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm1,16V12.43a4.88,4.88,0,0,0,3.17-2.33,4.1,4.1,0,0,0-.08-4.21,4.53,4.53,0,0,0-3.72-2.25A4.61,4.61,0,0,0,9.18,4.91,4.41,4.41,0,0,0,7.86,8.07a1,1,0,0,0,2,0,2.42,2.42,0,0,1,2.43-2.43h0a2.52,2.52,0,0,1,2,1.28,2.09,2.09,0,0,1,.06,2.2A2.92,2.92,0,0,1,12,10.54a1,1,0,0,0-1,1V16a1,1,0,0,0,2,0Zm-1,2a1,1,0,1,0,1,1A1,1,0,0,0,12,18Z"></path></svg></span>
+                                        <span class="support_text">Support Centre</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                
+
+    <div class="content content--for-thin content-auth">
+        <div class="info_signin_center info_content_start">
+            <div class="info_centre_adjust">
+                <div class="auth_content_wrapper content__wrapper--thin auth_title_1">
+                    <h1 class="line-medium-text-larger">
+                        Sign in to your account
+                    </h1>
+                </div>
+                <div class="ui-kit-markup auth_title_1 text-grey-dark">
+                    <h5>
+                        <strong>
+                            <span class="line-medium-text-small">
+                                Don't have an account?
+                            </span>
+                            &nbsp;<a class="line-cumedium-text-small" href="/#signUp" id="lnkRegistration">Sign up</a>
+                        </strong>
+                    </h5>
+                </div>
+                <div class="auth_content_wrapper content__wrapper--thin content__wrapper--white-box">
+
+                    <form id="loginform" class="ui-kit-form" action="" method="post">
+                        <div class="auth_box">
+                            
+
+
+                            <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="/connect/authorize/callback?client_id=pkce_patientaccess_web&amp;redirect_uri=https%3A%2F%2Fapp.patientaccess.com%2Fsignin-callback&amp;response_type=code&amp;scope=openid%20profile%20patientaccess_api&amp;state=6d2949747bd94dc5a54a5ab3e392b4cc&amp;code_challenge=CBVOQkAloDu-5-ofwWy_0BJyMUXkn6TWq8wOTdawWC4&amp;code_challenge_method=S256&amp;response_mode=query&amp;titleType=default" />
+                            <input id="ForgottenEmailLink" name="ForgottenEmailLink" type="hidden" value="" />
+                            <input id="ForgottenUserIDLink" name="ForgottenUserIDLink" type="hidden" value="https://app.patientaccess.com/forgot/user-id" />
+                            <div class="form-item">
+                                <div class="form-item">
+                                    <div class="input-label input-label-small">
+                                        <label class="line-small-text-small">Email</label>
+                                    </div>
+                                    <div class="input-text">
+                                    <table>
+                                      <tr>
+                                          <td>
+                                          <input id="txtUsername" placeholder="Enter your email" maxlength="90" data-validate-field="username" type="text" data-val="true" data-val-length="The field Email or User ID must be a string with a maximum length of 90." data-val-length-max="90" data-val-required="Please enter your email." name="email" value="{{email}}" />
+                                        </td>
+
+                                    </tr>
+                                    </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-item">
+                                <div class="input-label input-label-small">
+                                    <label class="line-small-text-small">Password</label>
+                                </div>
+                                <div class="input-password input-password-toggle">
+                                    <input type="password" id="password" placeholder="Enter your password" data-validate-field="password" maxlength="99" data-val="true" data-val-length="The field Password must be a string with a maximum length of 99." data-val-length-max="99" data-val-required="Please enter your password." name="password" value="{{password}}" />
+                                      <i class="fa-solid fa-eye" id="eye"></i>
+                                </div>
+                            </div>
+
+
+                            <div class="form-item login_rememberme">
+                                <div class="input-checkbox input-checkbox-medium">
+                                    <label>
+                                        <input type="checkbox" data-val="true" data-val-required="The RememberLogin field is required." id="RememberLogin" name="RememberLogin" value="true">
+                                        <span>Remember Email or User ID</span>
+                                    </label>
+                                </div>
+                            </div>
+                                <div class="form-item login_rememberme">
+                                    <div class="input-checkbox input-checkbox-medium">
+                                        <label>
+                                            <input type="checkbox" data-val="true" data-val-required="The StaySignedIn field is required." id="StaySignedIn" name="StaySignedIn" value="true">
+                                            <span>Stay signed in</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <br>
+                                  {% for error in errors %}
+                                  <p style="color: red">{{ error }}</p>
+                                  {% endfor %}
+                                </div>
+                            <div class="form-buttons">
+                                <button id="btnLogin" type="submit" name="button" value="login" class="ui-kit-button ui-kit-button-primary ui-kit-button-full ui-kit-button-medium">
+                                    <span class="line-cumedium-text-medium">Sign in</span>
+                                </button>
+                            </div>
+                            <div class="ui-kit-markup text-grey-dark auth_bottom_link heading-center">
+                                <h6>
+                                    <strong>
+                                        <span class="line-medium-text-small">Forgot your</span>
+                                        <a class="line-cumedium-text-small" href="../patient/patientSignUp/confirmMobileNumber.html" id="lnkForgotEmail">Email</a>,
+                                        <a id="ForgotUserIDLink" href="https://app.patientaccess.com/forgot/user-id">User ID</a><span class="line-medium-text-small">&nbsp;or</span>
+                                        <a class="line-cumedium-text-small" href="forgotPassword.html" id="lnkForgotPwd">Password</a>?
+                                    </strong>
+                                </h6>
+                            </div>
+                        </div>
+                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8ETOBedkhYRFv_AVolE7yN6C-DAj48wM6GtbYImnVjJ3xUWvMTdKZXxnhChcLM2he0boT48g8zDjZxkItqCpZeD77XvQ79YLweJmp3527Oj9ic9rfvQYa8X2z8iFmujTJCVeAr5TPKVoiUvwGSbCxq0" /><input name="RememberLogin" type="hidden" value="false"><input name="StaySignedIn" type="hidden" value="false"></form>
+            </div>
+            <div class="auth_content_wrapper auth_support_links auth_end_signin font_small">
+                <a class="line-cumedium-text-small" rel="noopener" target="_blank" href="https://support.patientaccess.com/privacy-policy">Privacy Policy</a>&nbsp;<span class="text-grey-dark dot_links">&middot;</span>&nbsp;
+                <a class="line-cumedium-text-small" rel="noopener" target="_blank" href="https://support.patientaccess.com/terms-of-use">Terms of use</a>&nbsp;<span class="text-grey-dark dot_links">&middot;</span>&nbsp;
+                <a class="line-cumedium-text-small" rel="noopener" target="_blank" href="https://support.patientaccess.com/accessibility-statement">Accessiblity</a>
+            </div>
+            <div class="recaptcha-statements auth_support_links">
+                <p>
+                    This site is protected by reCAPTCHA and <br />
+                    the Google <a target="_blank" href="https://policies.google.com/privacy">Privacy Policy</a> and
+                    <a target="_blank" href="https://policies.google.com/terms">Terms of Service </a> apply. <br />
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+            </section>
+        </div>
+        <!-- <script src="../../js/user/login.js"></script> -->
+        
+    
+    </div>
+    <script>
+        const passwordField = document.querySelector("#password");
+        const eyeIcon= document.querySelector("#eye");
+        eye.addEventListener("click", function(){
+          this.classList.toggle("fa-eye-slash");
+          const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+          passwordField.setAttribute("type", type);
+        })
+        </script>
+        </body>

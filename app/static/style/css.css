@@ -1,0 +1,327 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  list-style: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+}
+
+
+header{
+  width:100%;
+  position: fixed;
+  top:0; left: 0;
+  padding:2rem 1rem;
+  z-index: 1000;
+}
+
+.header-active{
+  background:#fff;
+  box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+  padding: .5rem 1rem;
+}
+
+header .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header a{
+  color:var(--black);
+}
+
+header a:hover{
+  color:rgb(9, 93, 148);
+  border: 2px solid rgb(2, 30, 48);
+}
+
+#logo{
+  width: 50px;
+  height: 50px;
+}
+
+header .container .logo{
+  font-size: 3rem;
+}
+
+header .container .logo span{
+  color:rgb(9, 93, 148);
+}
+
+header .nav ul{
+  margin:0; padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+header {
+    background-color: #fff;
+}
+
+header .nav ul li{
+  margin: 0 1rem;
+}
+
+header .nav ul li a{
+  font-size: 2rem;
+}
+
+header .fa-bars{
+  font-size: 3.5rem;
+  color:var(--blue);
+  cursor: pointer;
+  display: none;
+}
+
+
+.wrapper .sidebar {
+  background: rgb(5, 68, 104);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 225px;
+  height: 100%;
+  padding: 20px 0;
+  transition: all 0.5s ease;
+}
+
+.wrapper .sidebar .profile {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.wrapper .sidebar .profile img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.wrapper .sidebar .profile h3 {
+  color: #ffffff;
+  margin: 10px 0 5px;
+}
+
+.wrapper .sidebar .profile p {
+  color: rgb(206, 240, 253);
+  font-size: 14px;
+}
+.wrapper .sidebar ul li a {
+  display: block;
+  padding: 13px 30px;
+  border-bottom: 1px solid #10558d;
+  color: rgb(241, 237, 237);
+  font-size: 16px;
+  position: relative;
+}
+
+.wrapper .sidebar ul li a .icon {
+  color: #dee4ec;
+  width: 30px;
+  display: inline-block;
+}
+.wrapper .sidebar ul li a:hover,
+.wrapper .sidebar ul li a.active {
+  color: #0c7db1;
+
+  background: white;
+  border-right: 2px solid rgb(5, 68, 104);
+}
+
+.wrapper .sidebar ul li a:hover .icon,
+.wrapper .sidebar ul li a.active .icon {
+  color: #0c7db1;
+}
+
+.wrapper .sidebar ul li a:hover:before,
+.wrapper .sidebar ul li a.active:before {
+  display: block;
+}
+.wrapper .section {
+  width: calc(100% - 225px);
+  margin-left: 225px;
+  transition: all 0.5s ease;
+}
+
+.wrapper .section .top_navbar {
+  background: rgb(7, 105, 185);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.wrapper .section .top_navbar .hamburger a {
+  font-size: 28px;
+  color: #f4fbff;
+}
+
+.wrapper .section .top_navbar .hamburger a:hover {
+  color: #a2ecff;
+}
+
+body.active .wrapper .sidebar {
+  left: -225px;
+}
+
+body.active .wrapper .section {
+  margin-left: 0;
+  width: 100%;
+}
+
+.middle-content {
+  display: block;
+  padding: 20px;
+}
+.full {
+  width: 100%;
+  float: left;
+}
+
+/* Style the list */
+ul.breadcrumb {
+  padding: 10px 16px;
+  list-style: none;
+  background-color: #eee;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+  display: inline;
+  font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li + li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+  color: #01447e;
+  text-decoration: underline;
+}
+.p-20 {
+  padding: 20px 0 20px 0;
+}
+h2 {
+  margin-bottom: 15px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+a {
+  color: rgb(5, 68, 104);
+}
+a:hover {
+  color: rgb(7, 105, 185);
+}
+h2 a.btn {
+  float: right;
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+  background-color: rgb(5, 68, 104);
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+h2 a.btn:hover {
+  background-color: rgb(7, 105, 185);
+}
+label {
+  font-size: 14px;
+  color: #000;
+  font-weight: 700;
+  margin-bottom: 5px;
+  display: block;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+  width: 96%;
+  border: 1px solid rgb(7, 105, 185);
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+input[type="submit"] {
+  background-color: rgb(7, 105, 185);
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background-color: rgb(5, 68, 104);
+}
+.field-box {
+  display: block;
+  float: left;
+}
+.span-3 {
+  width: 33.333%;
+}
+.span-5 {
+  width: 20%;
+}
+a.add-more {
+  float: right;
+  display: block;
+  margin: 10px 0;
+  clear: both;
+}
+.cur {
+  cursor: pointer;
+}
+.share-btn {
+  font-size: 13px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #930126;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-left: auto;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.share-btn:hover {
+  background-color: #d3936f;
+}

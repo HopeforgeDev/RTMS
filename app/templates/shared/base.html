@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/style/css.css">
+    <link rel="icon" sizes="180x180" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="152x152" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="144x144" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="120x120" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="114x144" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="76x76" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="72x72" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="60x60" href="../../static/images/rtms_logo.png">
+    <link rel="icon" sizes="57x57" href="../../static/images/rtms_logo.png">
+    <style>
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select,
+        textarea {
+        width: 96%;
+        border: 1px solid rgb(7, 105, 185);
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        }
+
+        .wrapper .sidebar ul li div {
+        display: block;
+        padding: 13px 30px;
+        border-bottom: 1px solid #10558d;
+        color: rgb(241, 237, 237);
+        font-size: 16px;
+        position: relative;
+        }
+
+        .wrapper .sidebar ul li div .icon {
+        color: #dee4ec;
+        width: 30px;
+        display: inline-block;
+        }
+        .wrapper .sidebar ul li div:hover,
+        .wrapper .sidebar ul li div.active {
+        color: #0c7db1;
+
+        background: white;
+        border-right: 2px solid rgb(5, 68, 104);
+        }
+
+        .wrapper .sidebar ul li div:hover .icon,
+        .wrapper .sidebar ul li div.active .icon {
+        color: #0c7db1;
+        }
+
+        .wrapper .sidebar ul li div:hover:before,
+        .wrapper .sidebar ul li div.active:before {
+        display: block;
+        }
+    </style>
+    {% block title %}
+    {% endblock %}
+</head>
+
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+</html>

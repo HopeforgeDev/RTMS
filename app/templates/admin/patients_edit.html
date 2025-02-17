@@ -1,0 +1,171 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+<style>
+    input[type="number"],
+    input[type="password"],
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"]{
+      width: 96%;
+      border: 1px solid rgb(7, 105, 185);
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+</style>
+
+    <title>RMS - Patients</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+
+                <li>
+                    <a href="/admin/dashboard">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+               <li>
+                    <a href="/admin/doctors">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Patients</span>
+                    </div>
+                </li>                 <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+
+
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      
+                      <li><a href="/admin/patients">Patients</a></li>
+                      <li>Edit Patient</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+                     {% if current_admin %}
+                    <h2>
+                        Edit Patient
+                    </h2>
+                    <form action="/admin/edit_patient/{{current_patient.id}}" method="post">
+                      <label for="name">First Name:</label>
+                      <input type="text" id="first_name" name="first_name" value={{current_patient.first_name}}><br>
+                      <label for="middle_name">Middle Name :</label>
+                      <input type="text" id="middle_name" name="middle_name" value={{current_patient.middle_name}}><br>
+                      <label for="last_name">Last Name:</label>
+                      <input type="text" id="last_name" name="last_name" value={{current_patient.last_name}}><br>
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" name="email" value={{current_patient.email}}><br>
+                      <label for="contact_number">Contact Number:</label>
+                      <input type="tel" id="contact_number" name="contact_number" value={{current_patient.contact_number}}><br>
+                      <label for="date_of_birth">Date of Birth</label>
+                      <input type="date" id="date_of_birth" name="date_of_birth" value={{current_patient.date_of_birth}}><br
+                      <label for="length">Length</label>
+                      <input type="number" id="length" name="length" value={{current_patient.length}}><br
+                      <label for="weight">Weight</label>
+                      <input type="number" id="weight" name="weight" value={{current_patient.weight}}><br
+                      <label for="gender">Gender</label>
+                      <select name="gender" id="gender">
+                        <option value="no_option">------------------------------------------------------------------------------------------------------------ select gender
+                          ------------------------------------------------------------------------------------------------------------ </option>
+                        <option value="Male">------------------------------------------------------------------------------------------------------------------ Male ------------------------------------------------------------------------------------------------------------------
+                        </option>
+                        <option value="Female">----------------------------------------------------------------------------------------------------------------- Female
+                          ------------------------------------------------------------------------------------------------------------------ </option>
+                      </select><br
+                      <label for="medicines">Medicines:</label>
+                      <input type="text" id="medicines" name="medicines" value={{current_patient.medicines}}><br>
+                      <label for="pathological_cases">Pathological Cases:</label>
+                      <input type="text" id="pathological_cases" name="pathological_cases" value={{current_patient.pathological_cases}}><br>
+                      <label for="permanent_health_symptoms">Permanent Health Symptoms:</label>
+                      <input type="text" id="permanent_health_symptoms" name="permanent_health_symptoms" value={{current_patient.permanent_health_symptoms}}><br>
+                      <label for="surgeries">Surgeries:</label>
+                      <input type="text" id="surgeries" name="surgeries" value={{current_patient.surgeries}}><br>
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" name="password" placeholder="Enter the new patient password" value="" required><br>
+                        <input type="submit" value="Submit">
+                    </form>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+    </div>
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}
+

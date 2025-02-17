@@ -1,0 +1,136 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <link rel="stylesheet" href="../../jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../jquery-ui/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="../../static/style/css.css">
+
+    <title>RMS - Create Appointment</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Patient page</h3>
+                
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/patient/dashboard/">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">Appointments</span>
+                    </div>
+                </li>
+               
+                {% if current_patient %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_patient %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                        
+                        <li><a href="/patient/appointments">Appointments</a></li>
+                      <li><a href="/patient/appointment/choose_specialization">Create New Appointment</a></li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                {% if current_patient %}
+                    <h2>
+                        Create New Appointment
+                    </h2>
+                    <form action="/patient/appointment/choose_specialization" method="post">
+                        <label for="specialization_name">Specializations :</label>
+                        <select name="specialization_name" id="specialization_name">
+                            <option value="">- Select Option -</option>
+                            {% for spec_name in specialization_name_list %}
+                            <option value="{{ spec_name }}" {% if form and form.specialization_name == spec_name %}selected{% endif %}>
+                                {{ spec_name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <br />
+                        <input type="submit" value="submit" style="width: 1055px;"><br>
+                    </form>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
+    <script src="jquery-ui/jquery-ui.min.js"></script>
+    <script src="jquery-ui/jquery.timepicker.min.js"></script>
+  <script>
+    $(document).ready(function(){
+            
+            
+            $( ".datepicker" ).datepicker();
+            $('input.timepicker').timepicker({});
+            
+    });
+
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    });
+  </script>
+
+{% endblock %}

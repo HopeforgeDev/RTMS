@@ -1,0 +1,117 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - Specializations</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="Capture.PNG">
+                <h3>Doctor's page </h3>
+                
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="dashboard.html" >
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="offices.html">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">Offices</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="patients.html">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Patients </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="specializations.html" class="active">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="item">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://127.0.0.1:8000/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <!-- add button here -->
+                <button class="share-btn">Share Location <i class='fas fa-map-marker-alt'></i></button>
+                <!-- add button here -->
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li><a href="specializations.html">Specializations</a></li>
+                      <li>Create New Specialization</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                    
+<h2>
+    Specializations List
+</h2>
+<form action="" method="post">
+  <label for="specialization_name">Name:</label>
+  <input type="text" id="specialization_name" name="specialization_name" value=""><br>
+  <input type="submit" value="Submit">
+</form> 
+
+
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}

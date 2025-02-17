@@ -1,0 +1,409 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+<link href="jquery-ui/jquery-ui.min.css" rel="stylesheet">
+<link href="jquery-ui/jquery.timepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        input[type="number"],
+        input[type="time"],
+        input[type="date"]{
+          width: 96%;
+          border: 1px solid rgb(7, 105, 185);
+          padding: 5px;
+          margin-bottom: 10px;
+          border-radius: 5px;
+        }
+    </style>
+
+<title>RMS - Offices</title>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper">
+    <!--Top menu -->
+    <div class="sidebar">
+        <!--profile image & text-->
+        <div class="profile">
+            <img src="../../static/images/Capture.PNG">
+            <h3>Doctor's page </h3>
+
+        </div>
+        <!--menu item-->
+        <ul>
+            <li>
+                <a href="/doctor/dashboard">
+                    <span class="icon"><i class="fas fa-home"></i></span>
+                    <span class="item">My Profile</span>
+                </a>
+            </li>
+            <li>
+                <div class="active">
+                    <span class="icon"><i class="fas fa-user-shield"></i></span>
+                    <span class="item">Offices</span>
+                </div>
+            </li>
+            {% if current_doctor %}
+            <li>
+                <a href="/logout">
+                    <span class="icon"><i class="fas fa-cog"></i></span>
+                    <span class="item">Log out</span>
+                </a>
+            </li>
+            {% endif %}
+            {% if not current_doctor %}
+            <li>
+                <a href="/login">
+                    <span class="icon"><i class="fas fa-cog"></i></span>
+                    <span class="item">Login</span>
+                </a>
+            </li>
+            {% endif %}
+    </ul>
+</div>
+<!-- Navigation Bar-->
+<div class="section">
+    <div class="top_navbar">
+        <div class="hamburger">
+            <a href="#">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
+        <label class="share-btn">Location
+            <input name="my_location" type="checkbox">
+
+        </label>
+    </div>
+
+    <!-- start of middle content -->
+    <div class="middle-content">
+        <div class="full">
+            <ul class="breadcrumb">
+                <li><a href="/doctor/offices">Offices</a></li>
+                <li>Create New Office</li>
+            </ul>
+        </div>
+
+        <div class="full p-20">
+
+            <h2>
+                Create New Office
+            </h2>
+            <form action="/doctor/create_office" method="post">
+                <label for="hospital_affiliation">Hospital Affiliation :</label>
+                <select id="hospital_affiliation" name="hospital_affiliation_option">
+                    <option value=""> - select option -</option>
+                    {% for hospital_name in hospital_affiliation_names %}
+                    <option value="{{loop.index}}">{{hospital_name}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+
+                <label for="time_slot">Time Slot Per Patient :</label>
+                <input autocomplete="off" id="time_slot" name="time_slot_per_client_in_min" min="0"
+                       placeholder="Enter your requested time slot per patient"
+                       required type="number" value=""><br>
+
+                <label for="first_fee">First Consultation Fee :</label>
+                <input autocomplete="off" id="first_fee" name="first_consultation_fee" min="0"
+                       placeholder="Enter your requested first consultation fee"
+                       required type="number" value=""><br>
+
+                <label for="followup_fee">Followup Consultation Fee :</label>
+                <input autocomplete="off" id="followup_fee" name="followup_consultation_fee" min="0"
+                       placeholder="Enter your requested followup consultation fee"
+                       required type="number" value=""><br>
+
+                <label for="city">City :</label>
+                <input autocomplete="off" id="city" name="city" placeholder="Enter the office city" required type="text"
+                       value=""><br>
+
+                <label for="country">Country :</label>
+                <input autocomplete="off" id="country" name="country" placeholder="Enter the office country" required
+                       type="text"
+                       value=""><br>
+
+                <hr/>
+                <br>
+                <div class="full">
+                    <h3>Doctor Availability</h3>
+                    <br/>
+                    <input id="i" name="i" type="hidden" value="1">
+                    <div class="availability_datetime_all_rows">
+                        <div class="full" id="qualification_row" style="border-bottom: thin dashed #10558d; padding-bottom: 10px; margin-bottom: 10px;">
+                            <div class="field-box span-3">
+                                <label>Date</label>
+                                <input autocomplete="off" id="date" name="date[0]"
+                                       placeholder="Enter your start date" required type="date">
+                            </div>
+                                    <div class="field-box span-3">
+                                        <label>Start Time:</label>
+                                        <input autocomplete="off" id="start_time" name="start_time[0]"
+                                               placeholder="Enter your start time"
+                                               required type="time">
+                                    </div>
+                                    <div class="field-box span-3">
+                                        <label>End Time:</label>
+                                        <input autocomplete="off" id="end_time" name="end_time[0]"
+                                               placeholder="Enter your end time"
+                                               required type="time">
+                                    </div>
+                                      <div class="field-box span-3">
+                                      <label for="is_available">Is Available ?</label>
+                                      <select name="is_available" id="is_available[0]" >
+                                        <option value="1" >Yes</option>
+                                        <option value="0" >No</option>
+                                      </select>
+                                      </div>
+                                    <div class="field-box span-3">
+                                        <label for="reason_of_unavailability">Reason Of Unavailability :</label>
+                                        <textarea disabled id="reason_of_unavailability"
+                                                  name="reason_of_unavailability[0]" rows="1"
+                                                  style="width: 100%;"></textarea>
+                                    </div>
+                                </div>
+                    </div>
+                <br>
+                <a class="add-more cur" id="add_more_availability_datetime"><i class="fa fa-plus-square"
+                                                                               style="font-size:24px;color:blue;margin:10px"></i></a>
+                <br>
+                </div>
+
+
+                <div class="full">
+                    <h3>In-network Insurance</h3>
+                    <br/>
+        <input type="hidden" name="j" id="j" value="1">
+                    <div class="insurance_all_rows">
+                        <div>
+                            <div class="field-box full">
+                                <label>Insurance Name</label>
+                                <input name="insurance_name[0]" type="text" value="" placeholder="Enter your insurance name" required autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <a class="add-more cur" id="add_more_insurance_name"><i class="fa fa-plus-square"
+                                                                            style="font-size:24px;color:blue;margin:10px"></i></a>
+                    <br>
+                </div>
+                    <br>
+                                <hr/>
+
+                <br>
+                <input type="submit" value="submit" style="width: 1030px;"><br>
+            </form>
+            {% for error in errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+                <div id='myMap' style='width:1055px;height:800px;'></div>
+
+        </div>
+    </div>
+
+
+    <!-- end of middle content -->
+
+</div>
+</div>
+<!-- -->
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://releases.jquery.com/git/jquery-git.min.js"></script>
+<script src="jquery-ui/jquery-ui.min.js"></script>
+<script src="jquery-ui/jquery.timepicker.min.js"></script>
+
+        <script type='text/javascript'>
+			function initMap() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: 'Ahi5fdFNJrgjzGqsF9nloXNm7wfNIAadfGavb032SJAKMysVD12cppvXL2ORneCy'
+                });
+                var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+					color: '#f00',
+					draggable: true
+				});
+                map.entities.push(pushpin);
+
+                Microsoft.Maps.Events.addHandler(
+					pushpin,
+					'dragend',
+					function (args) {
+						document.getElementById('office_latitude').value = pushpin.getLocation().latitude;
+						document.getElementById('office_longitude').value = pushpin.getLocation().longitude;
+					}
+				);
+            }
+
+        </script>
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=initMap' async defer></script>
+        <script type="text/javascript">
+
+            var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+        var i = 1; //Initial field counter is 1
+
+$(document).ready(function(){
+    var maxField = 10; //Input fields increment limitation
+        var i = 1; //Initial field counter is 1
+    var add_more_availability_datetime = $('#add_more_availability_datetime'); //Add button selector
+    var wrapperAvailabilityDatetime = $('.availability_datetime_all_rows'); //Input field wrapper
+
+    //Once add button is clicked
+    $(add_more_availability_datetime).click(function(){
+        //Check maximum number of input fields
+        if(i < maxField){
+    var fieldHTMLAvailabilityDatetime = '<div class="full" id="qualification_row" style="border-bottom: thin dashed #10558d; padding-bottom: 10px; margin-bottom: 10px;">'+
+               '<div class="field-box span-3">'+
+               ' <label>Date</label>'+
+               ' <input type="date" name="date['+i+']" id="start_date" placeholder="Enter your start date" class="datepicker" required autocomplete="off">'+
+           ' </div>'+
+                '<div class="field-box span-3">'+
+                '<label>Start Time:</label>'+
+                '<input type="time" name="start_time['+i+']" id="start_time" placeholder="Enter your start time" required autocomplete="off">'+
+         '   </div>'+
+               '<div class="field-box span-3">'+
+               ' <label>End Time:</label>'+
+               ' <input type="time" name="end_time['+i+']" id="end_time" placeholder="Enter your end time" required autocomplete="off">'+
+           ' </div>'+
+             '<div class="field-box span-3">'+
+              '<label for="is_available">Is Available ?</label>'+
+              '<select name="is_available" id="is_available" >'+
+                '<option value="1" >Yes</option>'+
+                '<option value="0" >No</option>'+
+              '</select>'+
+            '</div>'+
+            ' <div class="field-box span-3">'+
+  '<label for="reason_of_unavailability">Reason Of Unavailability :</label>'+
+ ' <textarea id="reason_of_unavailability" name="reason_of_unavailability['+i+']" rows="1" style="width: 100%;" disabled ></textarea>'+
+ '<a id="remove_availability_datetime" href="javascript:void(0);" class="add-more cur"><i class="fa fa-minus-square" style="font-size:24px;color:red;margin:18px"></i></a>'+
+  '</div>'+
+                '</div>';
+            $(wrapperAvailabilityDatetime).append(fieldHTMLAvailabilityDatetime); //Add field html
+        console.log('start_time['+i+']')
+            i++; //Increment field counter
+            document.getElementById("i").value = i;
+
+            var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+                $('select[name="is_available"]').change(function(){
+                var val = $(this).val();
+                if(val == 0){
+                    $(this).parent().parent().find("textarea").prop("disabled", false);
+                } else {
+                    $(this).parent().parent().find("textarea").prop("disabled", true);
+                    $(this).parent().parent().find("textarea").val('');
+                }
+    });
+        }
+    });
+
+
+
+    //Once remove button is clicked
+    $(wrapperAvailabilityDatetime).on('click', '#remove_availability_datetime', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        i--; //Decrement field counter
+        document.getElementById("i").value = i;
+    });
+
+    var maxFieldJ = 10; //Input fields increment limitation
+    var add_more_insurance_name = $('#add_more_insurance_name'); //Add button selector
+    var wrapperInsurance = $('.insurance_all_rows'); //Input field wrapper
+    var j = parseInt(document.getElementById("j").value);
+    j = j+1
+    //Once add button is clicked
+    $(add_more_insurance_name).click(function(){
+        //Check maximum number of input fields
+      if(j < maxField){
+            var fieldHTMLInsurance = '<div>'+
+      '<div class="field-box full">'+
+          '<label>Insurance Name</label>'+
+          '<input type="text" name="insurance_name['+j+']" value="">'+
+        '<a id="remove_insurance" href="javascript:void(0);" class="add-more cur"><i class="fa fa-minus-square" style="font-size:24px;color:red;margin:18px"></i></a>'+
+      '</div>'+
+                '</div>';
+            $(wrapperInsurance).append(fieldHTMLInsurance); //Add field html
+        console.log('insurance_name['+j+']')
+               j++; //Increment field counter
+            document.getElementById("j").value = j;
+        }
+    });
+
+    //Once remove button is clicked
+    $(wrapperInsurance ).on('click', '#remove_insurance', function(e){
+        e.preventDefault();
+        $(this).parent('div').parent('div').remove(); //Remove field html
+        console.log('insurance_name['+j+']')
+        j--; //Decrement field counter
+        document.getElementById("j").value = j;
+    });
+    $('select[name="is_available"]').change(function(){
+                var val = $(this).val();
+                if(val == 0){
+                    $(this).parent().parent().find("textarea").prop("disabled", false);
+                } else {
+                    $(this).parent().parent().find("textarea").prop("disabled", true);
+                    $(this).parent().parent().find("textarea").val('');
+                }
+    });
+});
+            $('select[name="is_available"]').change(function(){
+                var val = $(this).val();
+                if(val == 0){
+                    $(this).parent().parent().find("textarea").prop("disabled", false);
+                } else {
+                    $(this).parent().parent().find("textarea").prop("disabled", true);
+                    $(this).parent().parent().find("textarea").val('');
+                }
+    });
+
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    });
+
+    function reload_scripts(){
+        $('select[name="is_available"]').change(function(){
+                var val = $(this).val();
+                if(val == 0){
+                    $(this).parent().parent().find("textarea").prop("disabled", false);
+                } else {
+                    $(this).parent().parent().find("textarea").prop("disabled", true);
+                }
+            });
+    }
+
+
+</script>
+
+{% endblock %}

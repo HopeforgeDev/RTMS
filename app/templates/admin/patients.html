@@ -1,0 +1,159 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - Patients</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/Capture.PNG">
+                <h3>Admin page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+
+                <li>
+                    <a href="/admin/dashboard">
+                        <span class="icon"><i class="fas fa-user-shield"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+               <li>
+                    <a href="/admin/doctors">
+                        <span class="icon"><i class="fas fa-user-friends"></i></span>
+                        <span class="item">Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">Patients</span>
+                    </div>
+                </li>                 <li>
+                    <a href="/admin/specializations">
+                        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="item">Specializations</span>
+                    </a>
+                </li>
+
+
+                {% if current_admin %}
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_admin %}
+                <li>
+                    <a href="/login">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+<div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                      <li style="color:#0066CC;">Patients</li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+                     {% if current_admin %}
+                    <h2>
+                        Patients List
+                        <a href="/admin/create_patient" class="btn">Create New Patient</a>
+                    </h2>
+
+                    <table>
+                        <tr>
+                          <th>#</th>
+                          <th>First Name</th>
+                          <th>Middle Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                          <th>Contact Number</th>
+                            <th>Activity</th>
+                          <th>Action</th>
+                        </tr>
+                        {% for patient in all_patients_inform_list %}
+                        <tr>
+                          <td>{{loop.index}}</td>
+                          <td>{{patient.first_name}}</td>
+                          <td>{{patient.middle_name}}</td>
+                          <td>{{patient.last_name}}</td>
+                          <td>{{patient.email}}</td>
+                          <td>{{patient.contact_number}}</td>
+                            {% if patient.disabled %}
+                          <td>Deactivated</td>
+                            {% endif %}
+                            {% if not patient.disabled %}
+                          <td>Activated</td>
+                            {% endif %}
+                            <td><a href="/admin/edit_patient/{{patient.id}}"><i class='fas fa-edit' style='font-size:20px;color:darkblue'></i></a><br>
+                                <a class="cur" href="/admin/delete_patient/{{patient.id}}" onclick="if(confirm('Are You Sure?')){ alert('delete this record.') }"><i class="fa fa-trash-o" style="font-size:20px;color:red"></i></a><br>
+                                {% if patient.disabled %}
+                                <a class="cur" href="/admin/activate_patient/{{patient.id}}" onclick="if(confirm('Are You Sure?')){ alert('activate this patient.') }"><i class='fas fa-user-check' style='font-size:20px;color:blue'></i></a>
+                                {% endif %}
+                                {% if not patient.disabled %}
+                                <a class="cur" href="/admin/deactivate_patient/{{patient.id}}" onclick="if(confirm('Are You Sure?')){ alert('deactivate this patient.') }"><i class='fas fa-user-times' style='font-size:20px;color:red'></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                        </table>
+                    {% endif %}
+                  {% for error in errors %}
+                  <p style="color: red">{{ error }}</p>
+                  {% endfor %}
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}

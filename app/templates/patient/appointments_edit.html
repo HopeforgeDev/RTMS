@@ -1,0 +1,106 @@
+{% extends "shared/base.html" %}
+
+
+{% block title %}
+
+    <title>RMS - Edit my Appointments</title>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <!--Top menu -->
+        <div class="sidebar">
+           <!--profile image & text-->
+           <div class="profile">
+                <img src="../../static/images/patient-signUp.png">
+                <h3>Patient page</h3>
+
+            </div>
+            <!--menu item-->
+            <ul>
+                <li>
+                    <a href="/patient/dashboard/">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="item">My Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="active">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <span class="item">Appointments</span>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="/login/">
+                        <span class="icon"><i class="fas fa-cog"></i></span>
+                        <span class="item">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+<!-- Navigation Bar-->
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <a href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
+                <label class="share-btn">Location
+                    <input type="checkbox">
+                    
+                  </label>
+            </div>
+
+            <!-- start of middle content -->
+            <div class="middle-content">
+                <div class="full">
+                    <ul class="breadcrumb">
+                        <li><a href="appointments.html">Appointments</a></li>
+                      <li><a href="#">Edit Appointment</a></li>
+                    </ul>
+                </div>
+
+                <div class="full p-20">
+
+                    <h2>
+                    Edit Appointment
+                    </h2>
+                    <form action="#">
+                      <label for="probable_start_time">Probable Start Time :</label>
+                      <input type="text" id="probable_start_time" name="probable_start_time" value=""><br>
+                    
+                      <label for="actual_end_time">Actual End Time:</label>
+                      <input type="text" id="actual_end_time" name="actual_end_time" value=""><br>
+
+                      <label for="appointment_taken_date">Appointment Taken Date:</label>
+                      <input type="text" id="appointment_taken_date" name="appointment_taken_date" value=""><br>
+                      <br>
+                      <input type="submit" value="Submit">
+                    </form> 
+                </div>
+            </div>
+
+
+            <!-- end of middle content -->
+
+</div>
+<!-- -->
+        </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+  <script>
+ var hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", function(){
+        document.querySelector("body").classList.toggle("active");
+    })
+  </script>
+
+{% endblock %}
+
